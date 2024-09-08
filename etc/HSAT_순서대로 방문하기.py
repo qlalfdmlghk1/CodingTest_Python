@@ -22,34 +22,39 @@
 
 n,m = map(int, input().split())  #격자 크기, 순서대로 방문해야 하는 칸 수
 grid = []
-dest = []
+dest = []  # 방문해야 하는 목적지
+visited = [[False for _ in range(n)] for _ in range(n)]
+
 for _ in range(n) :
     grid.append(list(map(int, input().split())))
 for _ in range(m) :
     x,y = map(int, input().split())
     dest.append([x-1,y-1])
-visited = [[False for _ in range(n)] for _ in range(n)]
+
 
 #DFS로 풀 것임
 cnt = 0
 dr = [1,-1,0,0]
 dc = [0,0,1,-1]
 
-def dfs(now, destIdx) :
+def dfs(now, destIdx) :  # now : 현재 리스트
     global cnt
     if now == dest[destIdx] :
-        if destIdx == m-1 :
+        if destIdx == m-1 :  # 마지막 목적지까지 도달했으면 cnt++ && return
             cnt += 1
             return
-        else :
-            destIdx += 1
-    r,c = now
-    visited[r][c] = True
+        else :               # 중간 경유 목적지에 도달했다면
+            destIdx += 1     # 경유 인덱스 +1
+    cur_r,cur_c = now
+    visited[cur_r][cur_c] = True
+
     for i in range(4) :
-        nr,nc = r + dr[i], c + dc[i]
-        if 0 <= nr < n and 0 <= nc < n and visited[nr][nc] == False and grid[nr][nc] == 0 :
-            dfs([nr,nc],destIdx)
-    visited[r][c] = False
+        nex_r = cur_r + dr[i]
+        nex_c = cur_c + dc[i]
+        if (0 <= nex_r < n and 0 <= nex_c < n
+                and visited[nex_r][nex_c] == False and grid[nex_r][nex_c] == 0) :
+            dfs([nex_r,nex_c],destIdx)
+    visited[cur_r][cur_c] = False
     return
 
 dfs(dest[0],1)
