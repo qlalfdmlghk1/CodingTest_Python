@@ -10,17 +10,19 @@ for _ in range(m):
 
 visited = [False] * (n + 1)
 
-def dfs(x, graph, cnt):
+def dfs(x, graph):
     visited[x] = True
-    cnt[0] += 1           # 현재 노드를 포함한 카운트 증가
-    for nex in graph[x]:  # 현재 노드와 연결된 모든 노드에 대해
+    count = 1              # 현재 노드를 포함한 카운트
+    for nex in graph[x]:   # 현재 노드와 연결된 모든 노드에 대해
         if not visited[nex]:
-            dfs(nex, graph, cnt)
+            count += dfs(nex, graph)
+    return count
 
-upNode = [-1]    # upNode   : 상위 노드의 개수를 저장
-downNode = [-1]  # downNode : 하위 노드의 개수를 저장
-dfs(x, up, upNode)      # x를 기준으로 상위 노드 탐색
-dfs(x, down, downNode)  # x를 기준으로 하위 노드 탐색
+visited = [False] * (n + 1)
+up_count = dfs(x, up) - 1       # x를 기준으로 상위 노드 개수를 계산
 
-print(1 + upNode[0], end=" ")
-print(n - downNode[0])
+visited = [False] * (n + 1)
+down_count = dfs(x, down) - 1   # x를 기준으로 하위 노드 개수를 계산
+
+print(1 + up_count, end=" ")
+print(n - down_count)
