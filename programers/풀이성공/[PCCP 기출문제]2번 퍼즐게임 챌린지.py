@@ -1,6 +1,6 @@
-diffs = [1, 99999, 100000, 99995]
-times = [9999, 9001, 9999, 9001]
-limit = 3456789012
+diffs = [1, 5, 3]
+times = [2, 4, 7]
+limit = 30
 
 diffs.insert(0,0)
 times.insert(0,0)
@@ -9,6 +9,7 @@ levelEnd = max(diffs)
 start = 1
 end = levelEnd + 1
 level = -1
+result = -1
 answer = []
 
 while start <= end :
@@ -23,9 +24,11 @@ while start <= end :
     # print("time", time)
     if time <= limit :
         end = level - 1
+        result = level
         answer.append(level)
     else :
         start = level + 1
     # print("start", start)
     # print("end", end)
-print(min(answer))
+# print(min(answer))
+print(result)
