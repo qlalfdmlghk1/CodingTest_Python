@@ -1,31 +1,25 @@
+from collections import defaultdict
 n = int(input())
-tree = {}
-for i in range(n) :
-    root, left, right = map(str,input().split())
-    tree[root] = (left,right)
+graph = defaultdict(list)
 
-def preorder(root) :
-    if root != '.' :
-        print(root, end='')
-        preorder(tree[root][0])
-        preorder(tree[root][1])
+for _ in range(n) :
+    c,l,r = map(str,input().split())
+    graph[c].append((l,r))
+print(graph)
 
-def inorder(root) :
-    if root != '.':
-        inorder(tree[root][0])
-        print(root, end='')
-        inorder(tree[root][1])
+def preOrder(root) :
+    if graph[root][0] == "." and graph[root][1] == "." :
+        print(root)
+    preOrder(graph[root][0])
 
-def postorder(root) :
-    if root != '.':
-        postorder(tree[root][0])
-        postorder(tree[root][1])
-        print(root, end='')
+def inOrder(root) :
+    if graph[root][0] != "." and graph[root][1] != "." :
+        print(root)
+    else :
+        inOrder(graph[root][0])
 
-
-preorder('A')
-print()
-inorder('A')
-print()
-postorder('A')
-
+def postOrder(root) :
+    if graph[root][0] == "." and graph[root][1] == "." :
+        print(root)
+    else :
+        postOrder(graph[root][0])
