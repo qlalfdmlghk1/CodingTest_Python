@@ -35,6 +35,10 @@ def bfs(r,c) :
 
 for i in range(n) :
     for j in range(m) :
+        if grid[i][j] not in dic :
+            dic[grid[i][j]] = 1
+        else :
+            dic[grid[i][j]] += 1
         bfs(i,j)
 
 for _ in range(k) :
