@@ -14,7 +14,7 @@ def solution(n, w, num):
             for i in range(add_width) :
                 layer[idx] += 1
                 idx += 1
-        else :
+        else :  
             idx = w - 1
             for i in range(add_width):
                 layer[idx] += 1
