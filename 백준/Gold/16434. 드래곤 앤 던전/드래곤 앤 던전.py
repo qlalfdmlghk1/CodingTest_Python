@@ -32,10 +32,7 @@ result = []
 while left < right :
     mid = (left + right) // 2
     if game(n,max_attack,li,mid) :
-        # result.append(mid)
-        # result = min(result,mid)
         right = mid
     else :
         left = mid + 1
-    # print(left,right)
 print(left)
