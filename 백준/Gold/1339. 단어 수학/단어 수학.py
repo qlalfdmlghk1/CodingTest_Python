@@ -1,9 +1,6 @@
 n = int(input())
 words = []
-alpha = []
-
-for i in range(26) :
-    alpha.append([i,0])    
+alpha = [0] * 26
 
 for _ in range(n) :
     s = input()
@@ -11,14 +8,14 @@ for _ in range(n) :
 
 for word in words :
     for idx,w in enumerate(word) :
-        alpha[ord(w)-65][1] += 10**(len(word)-idx-1)
+        alpha[ord(w)-65] += 10**(len(word)-idx-1)
 
-alpha.sort(key = lambda x : x[1], reverse=True)
+alpha.sort(reverse=True)
 
 num = 9
 answer = 0
 for a in alpha :
-    if a[1] != 0 :
-        answer += (num * a[1])
+    if a != 0 :
+        answer += (num * a)
     num -= 1
 print(answer)
